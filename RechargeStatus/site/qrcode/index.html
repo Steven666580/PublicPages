@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Get the app</title>
+    <style>
+      body {
+        font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+        margin: 0;
+        padding: 2rem;
+      }
+      .wrap {
+        max-width: 640px;
+        margin: 0 auto;
+        text-align: center;
+      }
+      .btns {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        margin-top: 1rem;
+        flex-wrap: wrap;
+      }
+      a.btn {
+        padding: 0.9rem 1.2rem;
+        border-radius: 10px;
+        border: 1px solid #ccc;
+        text-decoration: none;
+        display: inline-block;
+      }
+      .note {
+        color: #666;
+        font-size: 0.95rem;
+        margin-top: 0.75rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <h1>Opening the right store…</h1>
+      <p>If nothing happens in a few seconds, choose your platform:</p>
+      <div class="btns">
+        <a
+          class="btn"
+          id="iosLink"
+          href="https://apps.apple.com/app/id6749468575"
+          >Open in App Store</a
+        >
+        <a
+          class="btn"
+          id="androidLink"
+          href="https://play.google.com/store/apps/details?id=com.yourco.app"
+          >Open in Google Play</a
+        >
+      </div>
+      <p class="note">
+        Tip: some in-app browsers (e.g., Instagram/WeChat) block store
+        redirects—use the buttons above or open in your browser.
+      </p>
+    </div>
+
+    <script>
+      (function () {
+        const iosStore = "https://apps.apple.com/app/id6749468575";
+        const androidStore =
+          "https://play.google.com/store/apps/details?id=com.yourco.app"; // TODO: put your real package
+        const query = new URLSearchParams(location.search);
+        const debug = query.has("debug") || query.get("noredirect") === "1";
+
+        const ua =
+          navigator.userAgent || navigator.vendor || window.opera || "";
+        const isAndroid = /Android/i.test(ua);
+        const isiOSClassic = /iPhone|iPad|iPod/i.test(ua);
+        const isiPadOS = /Macintosh/i.test(ua) && navigator.maxTouchPoints > 1; // iPadOS masquerading as Mac
+        const isiOS = isiOSClassic || isiPadOS;
+
+        // Try to redirect only if not debugging and we have a target URL
+        function go(url) {
+          if (!url) return;
+          // replace() avoids adding to history
+          location.replace(url);
+        }
+
+        if (!debug) {
+          if (isiOS) return go(iosStore);
+          if (isAndroid) return go(androidStore);
+          // Desktop: stay on page and show buttons
+        }
+
+        // Update visible links (optional but nice)
+        document.getElementById("iosLink").href = iosStore;
+        document.getElementById("androidLink").href = androidStore;
+      })();
+    </script>
+  </body>
+</html>

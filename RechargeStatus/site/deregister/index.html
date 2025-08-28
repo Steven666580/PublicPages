@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Deregister Phone</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Deregister Phone</h1>
+        <form id="deregisterForm">
+            <label for="reasonSelect">Reason for Deregistration:</label>
+            <select id="reasonSelect" name="reasonSelect" required>
+                <option value="" disabled selected>Select a reason</option>
+                <option value="Food too expensive">Food too expensive</option>
+                <option value="No longer needed">No longer needed</option>
+                <option value="Privacy concerns">Privacy concerns</option>
+                <option value="Technical issues">Technical issues</option>
+                <option value="Other">Other</option>
+            </select>
+
+            <label for="phone">Phone Number:</label>
+            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 1em;">
+                <span style="font-size:1em; color:#555;">+1</span>
+                <input type="tel" id="phone" name="phone" placeholder="Enter phone number" autocomplete="tel" required style="flex:1;">
+            </div>
+
+            <button type="button" id="sendCodeBtn">Send Verification Code</button>
+
+            <label for="code">Verification Code:</label>
+            <input type="text" id="code" name="code" placeholder="Enter verification code" disabled required>
+
+            <button type="submit" id="submitBtn" disabled>Submit</button>
+        </form>
+    </div>
+    <script src="deregister.js"></script>
+</body>
+</html>
